@@ -1,0 +1,8 @@
+button {
+    height: 33.33333333%;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
