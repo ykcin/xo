@@ -7,12 +7,10 @@ import { Component, Input } from '@angular/core';
     :host {
         width: 50px;
         height: 50px;
-        // border: 1px solid grey;
         text-align: center;
         font-size: 30px;
-        border: 1px dotted black;
-        color: red;
-        background-color: red;
+        border: 1px solid black;
+
     }
 `]
 })

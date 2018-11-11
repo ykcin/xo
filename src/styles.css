@@ -1,1 +1,73 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+/* As hex codes */
+
+.color-primary-0 {
+    color: #FEBDC0
+}
+
+
+/* Main Primary color */
+
+.color-primary-1 {
+    color: #FFD4D6
+}
+
+.color-primary-2 {
+    color: #FFC9CB
+}
+
+.color-primary-3 {
+    color: #FEB2B6
+}
+
+.color-primary-4 {
+    color: #FEA7AC
+}
+
+.color-secondary-1-0 {
+    color: #C2C0F6
+}
+
+
+/* Main Secondary color (1) */
+
+.color-secondary-1-1 {
+    color: #D5D4F7
+}
+
+.color-secondary-1-2 {
+    color: #CCCAF7
+}
+
+.color-secondary-1-3 {
+    color: #B9B7F6
+}
+
+.color-secondary-1-4 {
+    color: #B1AEF6
+}
+
+.color-secondary-2-0 {
+    color: #FFF7BE
+}
+
+
+/* Main Secondary color (2) */
+
+.color-secondary-2-1 {
+    color: #FFFAD4
+}
+
+.color-secondary-2-2 {
+    color: #FFF8C9
+}
+
+.color-secondary-2-3 {
+    color: #FFF6B2
+}
+
+.color-secondary-2-4 {
+    color: #FFF4A8
+}

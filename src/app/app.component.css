@@ -6,3 +6,9 @@ button {
     float: none;
     margin: 0 auto;
 }
+
+* {
+    font-family: Fantasy/*Replace with your custom font*/
+    , sans-serif !important;
+    /*Add the !important to overwrite all elements*/
+}

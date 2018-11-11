@@ -7,26 +7,31 @@ import {BoardService} from './boardservice.service'
     template: `
     <div class="container">
         <div class="row">
-            <div class="col-xs-4 center-block">
+
+            <div class="col-lg-4 col-sm-12 p-3">
                 <h2 class="text-center">Gameboard</h2>
-                <div class="myboard" style=" margin: 0 auto; width: 100%;">
-                    <div class="row" style=" margin: auto; width: 77%;" *ngFor="let row of [0,1,2]">
+                <div class="myboard">
+                    <div class="row justify-content-center" *ngFor="let row of [0,1,2]">
                         <square class="col-xs-3 center-block" id="{{col + row * 3}}" 
                             *ngFor="let col of [0,1,2]" 
                             [state]="squares[col+row*3]"
                             (click)="makeMove(col+row*3)"
-                            [style.background-color]="state === 'X' ? 'red' : 'black';"></square>
+                        ></square>
                     </div>
                 </div>
-                <button class="center-block text-center" (click)="newGame()">New Game</button>
+                <div class="row justify-content-center">
+                    <button class="btn btn-primary m-1" (click)="newGame()">New Game</button>
+                </div>
             </div>
-            <div class="col-xs-4">
+
+            <div class="col-lg-4 col-sm-12 p-3">
                 <h2 class="text-center">TURN</h2>
                 <h2 class="status text-center">{{status}}</h2>
                 <h2 class="text-center">GAME: </h2>
                 <h2 class="status text-center">{{this.gameService.getGameNumber()}}</h2>
             </div>
-            <div class="col-xs-4">
+
+            <div class="col-lg-4 col-sm-12 p-3">
                 <score-board></score-board>
             </div>
             
@@ -38,8 +43,13 @@ import {BoardService} from './boardservice.service'
             margin: auto;
             float: none;
         }
+        .container {
+            background-color: #C2C0F6;
+        }
         .myboard {
             border: 10px dotted pink;
+            margin: 0 auto; 
+            max-width: 220px;
         }
     `]
 })
