@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {GameService } from './gameservice.service'
 import {BoardService} from './boardservice.service'
-
+import { Injectable, ElementRef } from '@angular/core';
+// [ngStyle]="{'background-color': boardService.player ==='X' ? 'green' : 'blue' }"
 @Component({
     selector: 'gameboard',
     template: `
@@ -14,19 +15,32 @@ import {BoardService} from './boardservice.service'
                     <div class="row justify-content-center" *ngFor="let row of [0,1,2]">
                         <square class="col-xs-3 center-block" id="{{col + row * 3}}" 
                             *ngFor="let col of [0,1,2]" 
-                            [state]="squares[col+row*3]"
-                            (click)="makeMove(col+row*3)"
+                            [state]="boardService.squares[col+row*3]"
+                            (click)="boardService.makeMove(col+row*3)"
+                            (click)="clicked='true'"
                         ></square>
                     </div>
                 </div>
-                <div class="row justify-content-center">
-                    <button class="btn btn-primary m-1" (click)="newGame()">New Game</button>
+                <div class="">              
+                    <div [hidden]="!boardService.winner" 
+                        class="row justify-content-center align-items-center alert"
+                        [ngClass]="{'alert-primary': boardService.winner==='X', 
+                                    'alert-success' : boardService.winner==='0'}">
+                        <h3 *ngIf="boardService.winner!=='DRAW'" class="">Player {{boardService.winner}} wins</h3>
+                        <h3 *ngIf="boardService.winner==='DRAW'" class="">Sorry you both lose!!!</h3>
+                    </div>
+                </div>  
+                <div class="row justify-content-center align-items-center">
+                    <button class="btn m-1" 
+                     [ngClass]="{'btn-primary': boardService.winner === 'X', 
+                                'btn-secondary': boardService.winner === null,
+                                 'btn-success': boardService.winner === '0'}"
+                     (click)="boardService.newGame()">New Game {{boardService.winner}}</button>
                 </div>
             </div>
-
             <div class="col-lg-4 col-sm-12 p-3">
                 <h2 class="text-center">TURN</h2>
-                <h2 class="status text-center">{{status}}</h2>
+                <h2 class="status text-center">{{boardService.status()}}</h2>
                 <h2 class="text-center">GAME: </h2>
                 <h2 class="status text-center">{{this.gameService.getGameNumber()}}</h2>
             </div>
@@ -35,6 +49,20 @@ import {BoardService} from './boardservice.service'
                 <score-board></score-board>
             </div>
             
+        </div>
+        <div class="row">
+            <div class="col alert-success">
+                <h4>Hey</h4>
+                <p>There</p>
+            </div>
+            <div class="col alert-danger">
+                <h4>Grid</h4>
+                <p>Flex</p>
+            </div>
+            <div class="col alert-primary">
+                <h4  class="center-block">Hey</h4>
+                <p>There</p>
+            </div>
         </div>
     </div>
     `,
@@ -51,56 +79,26 @@ import {BoardService} from './boardservice.service'
             margin: 0 auto; 
             max-width: 220px;
         }
+
     `]
 })
 
 export class Gameboard {
-    squares = Array(9).fill(null);
-    player = 'X';
-    winner = null;
-    gameService: GameService;
 
-    constructor( gameService: GameService) {
-        this.gameService = gameService;
-        // this.gameService.incrementGameNumber();
+    gameService: GameService;
+    boardService: BoardService;
+
+    constructor( gameService: GameService, boardService: BoardService) {
+        this.gameService = gameService; 
+        this.boardService = boardService;
     }
-    
-    get status() {
-        return this.winner ? `Winner: ${this.winner}` :
-            `Player: ${this.player}`;
-    }
-    newGame() {
-        this.squares = Array(9).fill(null);
-        this.player = 'X';
-        this.winner = null;
-        this.gameService.incrementGameNumber();
-    }
-    makeMove(position) {
-        if (!this.winner && !this.squares[position]) {
-            this.squares[position] = this.player;
-            if (this.winningMove()) {
-                this.winner = this.player;
-                // if (this.player =='X') {
-                //     this.gameService.winPX();
-                // }
-                this.winner == "X" ? this.gameService.winPX() : this.gameService.winPO();
-            }
-            this.player = this.player=='X' ? '0' : 'X';
-        } 
-    }
-    winningMove(): boolean {
-        const lines = [
-            [0,1,2], [3,4,5], [6,7,8],
-            [0,3,6], [1,4,7], [2,5,8],
-            [0,4,8], [2,4,6]
-        ];
-        for (let line of lines) {
-            if (this.squares[line[0]]
-                && this.squares[line[0]] == this.squares[line[1]]
-                && this.squares[line[1]] == this.squares[line[2]]){
-                    return true;
-                }
-        }
-        return false;
-    }
+
+    // changeColor() {
+    //     this.color = 'orange';
+    //     if(this.boardService.player == 'X') {
+    //         this.color = 'red';
+    //     }
+    // }
+
+ 
 }

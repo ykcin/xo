@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 
 export class GameService {
-    public playerX_score: number;
-    public playerO_score: number;
-    public game_number: number;
+    playerX_score: number;
+    playerO_score: number;
+    game_number: number;
 
     constructor(){
         this.playerX_score = 0;
